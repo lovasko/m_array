@@ -12,6 +12,7 @@ build obj/general.o: compile src/general.c
 build obj/remove.o: compile src/remove.c
 
 build obj/algorithm/map.o: compile src/algorithm/map.c
+build obj/algorithm/search.o: compile src/algorithm/search.c
 build obj/algorithm/sort.o: compile src/algorithm/sort.c
 
 build bin/libmarray.so: link obj/access.o obj/general.o obj/algorithm/map.o obj/algorithm/sort.o
