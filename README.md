@@ -16,10 +16,11 @@ All operations have `O(1)` space complexity.
 | `m_array_init`          | `O(1)` |
 | `m_array_length`        | `O(1)` |
 | `m_array_map`           | `O(n)` |
+| `m_array_resize`        | `O(r)` |
 | `m_array_set`           | `O(1)` |
 | `m_array_sort`          | `O(q)` |
 
-where 
+where:
  * `n` denotes the length of the array.
  * `r` is the complexity of the systems `realloc` function
  * `q` is the complexity of the systems `qsort` function
