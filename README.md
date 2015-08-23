@@ -8,8 +8,8 @@ TODO
 ## Time and space complexity
 All operations have `O(1)` space complexity.
 
-| Operation               |  Time   |
-|-------------------------|---------|
+| Operation               | Time   |
+|-------------------------|--------|
 | `m_array_append`        | `O(r)` |
 | `m_array_get`           | `O(1)` |
 | `m_array_growth_factor` | `O(1)` |
