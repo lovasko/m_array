@@ -26,7 +26,7 @@ m_array_remove_all(struct m_array* array)
 		return M_ARRAY_E_NULL;
 
 	m_array_remove(array, 0, array->used_length);
-	m_array_resize(array, 8);
+	m_array_resize(array, array->init_length);
 
 	return M_ARRAY_OK;
 }

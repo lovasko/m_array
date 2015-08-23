@@ -17,11 +17,13 @@ struct m_array {
 	size_t used_length;
 	size_t alloc_length;
 	size_t object_size;
-	size_t end_index;
+	size_t init_length;
 	double growth_factor;
 };
 
-int m_array_init(struct m_array* array, size_t object_size);
+int m_array_init(struct m_array* array,
+                 size_t initial_length,
+                 size_t object_size);
 int m_array_length(struct m_array* array, size_t* out_length);
 int m_array_growth_factor(struct m_array* array, double new_growth_factor);
 int m_array_resize(struct m_array* array, size_t new_length);

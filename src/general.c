@@ -1,16 +1,16 @@
 #include "m_array.h"
 
 int
-m_array_init(struct m_array* array, size_t object_size)
+m_array_init(struct m_array* array, size_t initial_length, size_t object_size)
 {
 	if (array == NULL)
 		return M_ARRAY_E_NULL;
 
-	array->data = malloc(8 * object_size);
+	array->data = malloc(initial_length * object_size);
 	array->object_size = object_size;
-	array->end_index = 0;
 	array->used_length = 0;
-	array->alloc_length = 8;
+	array->alloc_length = initial_length;
+	array->init_length = initial_length;
 	array->growth_factor = M_ARRAY_GROWTH_EXPONENTIAL;
 
 	return M_ARRAY_OK;
