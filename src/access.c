@@ -32,9 +32,8 @@ m_array_set(struct m_array* array,
 	if (array == NULL)
 		return M_ARRAY_E_NULL;
 
-	if (index >= array->used_length)
+	if (index + object_count >= array->used_length)
 		return M_ARRAY_E_OUT_OF_BOUNDS;
-
 
 	set(array, index, object_count, data);
 	return M_ARRAY_OK;
