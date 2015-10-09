@@ -2,28 +2,80 @@
 General-purpose dynamic array implementation in the C89 language that runs on
 all POSIX-compatible systems.
 
-## Features
-TODO
+## Introduction 
+### Objects
+The design of the `m_array` expects the content to be homogeneous objects of
+arbitrary size - from one byte upwards. The size of the object in bytes is set
+during the call to the initialisation function `m_array_init`. All consequent
+function working with the array operate on objects (blocks of bytes) of such
+size.
+
+### Access
+Functions `m_array_get` and `m_array_set` allow to access or modify arbitrary
+element of the array. In the case of the `set` function, it is possible to
+modify multiple consecutive elements in one call.
+
+#### Bounds checking
+Both `get` and `set` operations are protected with boundary checks with object
+size granularity. Therefore, it is not possible to add new array elements with
+the `set` call.
+
+### Growth factor
+By definition, the dynamic array expands to necessary size when new elements
+are being appended. In order to minimise the number of calls to the potentially
+time-expensive `realloc` function, `m_array` pre-allocates memory. By default,
+it doubles the current memory size - `M_ARRAY_GROWTH_EXPONENTIAL`. This growth
+strategy might not be optimal at times and therefore, a second strategy that
+allocates only half of the current memory more - `M_ARRAY_GROWTH_CONSERVATIVE`.
+Both of these constants have type `double`, with values `2.0` and `1.5`
+respectively. It is possible to supply an entirely different growth factor
+(strictly great than `1.0`). To set the growth factor at any time, use the
+`m_array_growth_factor` function.
+
+### Algorithms
+Even though the `m_array` supports random access to arbitrary elements with
+bounds checking, it is possible to perform certain high-level operations on the
+whole list.
+
+#### Map
+In order to apply a certain function to all objects stored in the `m_array`,
+use the function `m_array_map`. Such function can be provided with an extra
+argument, a `payload` that can be used to provide additional data.
+
+#### Sort
+By providing a comparison function `cmp_fn` to the `m_array_sort`, the function
+is able to sort the elements. There is no option to choose the direction of the
+sort (ascending vs descending), as this can be precisely controlled by the
+inner workings of the comparator function.
+
+#### Search
+In order to search for an element, us the `m_array_search` function. By
+providing the `key` and the comparator `cmp_fn`, the library is able to locate
+such element. Depending on the value of the `is_sorted`, either the more
+optimal binary search algorithm is performed - resulting in `O(logn)`
+performance - or the linear walk from left to right through every element of
+the array - resulting in `O(n)` performance.
 
 ## Time and space complexity
 All operations have `O(1)` space complexity.
 
-| Operation               | Time   |
-|-------------------------|--------|
-| `m_array_append`        | `O(r)` |
-| `m_array_get`           | `O(1)` |
-| `m_array_growth_factor` | `O(1)` |
-| `m_array_init`          | `O(1)` |
-| `m_array_length`        | `O(1)` |
-| `m_array_map`           | `O(n)` |
-| `m_array_resize`        | `O(r)` |
-| `m_array_set`           | `O(1)` |
-| `m_array_sort`          | `O(q)` |
+| Operation               | Time                 |
+|-------------------------|----------------------|
+| `m_array_append`        | `O(r)`               |
+| `m_array_get`           | `O(1)`               |
+| `m_array_growth_factor` | `O(1)`               |
+| `m_array_init`          | `O(1)`               |
+| `m_array_length`        | `O(1)`               |
+| `m_array_map`           | `O(n)`               |
+| `m_array_resize`        | `O(r)`               |
+| `m_array_search`        | `O(n)` or `O(log n)` |
+| `m_array_set`           | `O(1)`               |
+| `m_array_sort`          | `O(q)`               |
 
 where:
  * `n` denotes the length of the array.
- * `r` is the complexity of the systems `realloc` function
- * `q` is the complexity of the systems `qsort` function
+ * `r` is the complexity of the systems `realloc` function (usually `O(n)`)
+ * `q` is the complexity of the systems `qsort` function (usually `O(nlogn)`)
 
 ## Examples
  * [Median of open files count](examples/openfiles.md)
