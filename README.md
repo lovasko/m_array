@@ -74,8 +74,8 @@ All operations have `O(1)` space complexity.
 
 where:
  * `n` denotes the length of the array.
- * `r` is the complexity of the systems `realloc` function (usually `O(n)`)
- * `q` is the complexity of the systems `qsort` function (usually `O(nlogn)`)
+ * `r` is the complexity of the systems `realloc` function, usually `O(n)`
+ * `q` is the complexity of the systems `qsort` function, usually `O(nlogn)`
 
 ## Examples
  * [Median of open files count](examples/openfiles.md)
