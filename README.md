@@ -32,6 +32,18 @@ respectively. It is possible to supply an entirely different growth factor
 (strictly great than `1.0`). To set the growth factor at any time, use the
 `m_array_growth_factor` function.
 
+### Memory management
+Even though `m_array` takes care of all things memory, its behaviour might not
+be optimal in all scenarios. Therefore, it is possible to either grow or shrink
+the underlying memory with the `m_array_resize` function.
+
+### Finalisation
+Adding elements to a `m_array` causes its internal memory buffers to grow. Once
+finished with adding elements, it is possible that the `m_array` would still
+hold unused internal memory due to the prefetch, expecting elements to be
+added. In order to release this memory back to the system, use the
+`m_array_trim` function.
+
 ### Algorithms
 Even though the `m_array` supports random access to arbitrary elements with
 bounds checking, it is possible to perform certain high-level operations on the
