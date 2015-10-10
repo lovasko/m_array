@@ -38,7 +38,14 @@ int m_array_set(struct m_array* array,
                 size_t index,
                 size_t object_count,
                 void* data);
+
 int m_array_append(struct m_array* array, size_t object_count, void* data);
+int m_array_prepend(struct m_array* array, size_t object_count, void* data);
+int m_array_insert(struct m_array* array,
+                   size_t index,
+                   size_t object_count,
+                   void* data);
+
 int m_array_remove(struct m_array* array, size_t index, size_t object_count);
 int m_array_remove_all(struct m_array* array);
 
