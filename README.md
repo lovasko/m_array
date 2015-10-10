@@ -77,12 +77,17 @@ All operations have `O(1)` space complexity.
 | `m_array_get`           | `O(1)`               |
 | `m_array_growth_factor` | `O(1)`               |
 | `m_array_init`          | `O(1)`               |
+| `m_array_insert`        | `O(n)`               |
 | `m_array_length`        | `O(1)`               |
 | `m_array_map`           | `O(n)`               |
+| `m_array_prepend`       | `O(n)`               |
+| `m_array_remove_all`    | `O(n)`               |
+| `m_array_remove`        | `O(n)`               |
 | `m_array_resize`        | `O(r)`               |
 | `m_array_search`        | `O(n)` or `O(log n)` |
 | `m_array_set`           | `O(1)`               |
 | `m_array_sort`          | `O(q)`               |
+| `m_array_trim`          | `O(1)` or `O(n)`     |
 
 where:
  * `n` denotes the length of the array.
