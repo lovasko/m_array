@@ -58,3 +58,15 @@ m_array_resize(struct m_array* array, size_t new_length)
 	return M_ARRAY_OK;
 }
 
+int
+m_array_trim(struct m_array* array)
+{
+	if (array == NULL)
+		return M_ARRAY_E_NULL;
+
+	array->data = realloc(array->data, array->used_length * array->object_size);
+	array->alloc_length = array->used_length;
+
+	return M_ARRAY_OK;
+}
+

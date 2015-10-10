@@ -31,6 +31,8 @@ int m_array_init(struct m_array* array,
 int m_array_length(struct m_array* array, size_t* out_length);
 int m_array_growth_factor(struct m_array* array, double new_growth_factor);
 int m_array_resize(struct m_array* array, size_t new_length);
+int m_array_trim(struct m_array* array);
+
 int m_array_get(struct m_array* array, size_t index, void** out_data);
 int m_array_set(struct m_array* array,
                 size_t index,
