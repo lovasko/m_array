@@ -41,10 +41,10 @@ int m_array_remove(struct m_array* array, size_t index, size_t object_count);
 int m_array_remove_all(struct m_array* array);
 
 int m_array_map(struct m_array* array, void(*fn)(void*,void*), void* payload);
-int m_array_sort(struct m_array* array, int(*cmp_fn)(const void*, const void*));
+int m_array_sort(struct m_array* array, int(*cmp_fn)(const void*,const void*));
 int m_array_search(struct m_array* array,
                    void* key,
-                   int(*cmp_fn)(const void*, const void*),
+                   int(*cmp_fn)(const void*,const void*),
                    int is_sorted,
                    size_t* out_index);
 
