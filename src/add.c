@@ -9,6 +9,7 @@ m_array_insert(struct m_array* array,
                void* data)
 {
 	size_t new_length;
+	size_t need_length;
 
 	if (array == NULL)
 		return M_ARRAY_E_NULL;
@@ -16,9 +17,10 @@ m_array_insert(struct m_array* array,
 	if (index > array->used_length)
 		return M_ARRAY_E_OUT_OF_BOUNDS;
 
-	if (array->used_length + object_count > array->alloc_length) {
+	need_length = array->used_length + object_count;
+	if (need_length > array->alloc_length) {
 		new_length = (size_t)(array->alloc_length * array->growth_factor);
-		if (new_length <= array->alloc_length)
+		if (new_length < need_length)
 			return M_ARRAY_E_GROWTH;
 		m_array_resize(array, new_length);
 	}
