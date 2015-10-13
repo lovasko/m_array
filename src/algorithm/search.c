@@ -23,7 +23,7 @@ m_array_search(struct m_array* array,
 		                cmp_fn);
 
 		if (match == NULL)
-			return M_ARRAY_E_NOT_FOUND;
+			return M_ARRAY_NOT_FOUND;
 		else {
 			*out_index = (size_t)((uint8_t*)match - array->data);	
 			return M_ARRAY_OK;
@@ -35,7 +35,7 @@ m_array_search(struct m_array* array,
 				return M_ARRAY_OK;
 			}
 		}
-		return M_ARRAY_E_NOT_FOUND;
+		return M_ARRAY_NOT_FOUND;
 	}
 }
 

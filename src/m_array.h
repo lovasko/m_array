@@ -8,7 +8,7 @@
 #define M_ARRAY_E_NULL          1
 #define M_ARRAY_E_OUT_OF_BOUNDS 2
 #define M_ARRAY_E_GROWTH        3
-#define M_ARRAY_E_NOT_FOUND     4
+#define M_ARRAY_NOT_FOUND       4
 
 #define M_ARRAY_GROWTH_CONSERVATIVE 1.5
 #define M_ARRAY_GROWTH_EXPONENTIAL  2.0
