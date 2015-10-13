@@ -94,6 +94,25 @@ where:
  * `r` is the complexity of the systems `realloc` function, usually `O(n)`
  * `q` is the complexity of the systems `qsort` function, usually `O(nlogn)`
 
+## Return codes 
+### M_ARRAY_OK
+The operation was successful.
+
+### M_ARRAY_E_NULL
+Either one or more of the arguments are `NULL`.
+
+### M_ARRAY_E_OUT_OF_BOUNDS
+The array subscription index is greater than the actual size of the array.
+
+### M_ARRAY_E_GROWTH
+Based on the growth factor and the current size of the array it is not possible
+to grow enough so that the operation can proceed. In order to fix this, set the
+growth factor to a greater number with the `m_array_growth_factor` function and
+retry the operation.
+
+### M_ARRAY_NOT_FOUND
+The `m_array_search` function was not able to locate the specified element.
+
 ## Examples
  * [Median of open files count](examples/openfiles.md)
 
