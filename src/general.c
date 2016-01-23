@@ -17,6 +17,23 @@ m_array_init(struct m_array* array, size_t initial_length, size_t object_size)
 }
 
 int
+m_array_free(struct m_array* array)
+{
+	if (array == NULL)
+		return M_ARRAY_E_NULL;
+
+	free(array->data);
+	array->data = NULL;
+	array->used_length = 0;
+	array->alloc_length = 0;
+	array->object_size = 0;
+	array->init_length = 0;
+	array->growth_factor = 0.0;
+
+	return M_ARRAY_OK;
+}
+
+int
 m_array_length(struct m_array* array, size_t* out_length)
 {
 	if (array == NULL || out_length == NULL)
