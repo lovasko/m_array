@@ -1,4 +1,4 @@
-Copyright (c) 2015, Daniel Lovasko
+Copyright (c) 2015, 2016 Daniel Lovasko
 All rights reserved. 
 
 Redistribution and use in source and binary forms, with or without 
