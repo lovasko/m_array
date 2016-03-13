@@ -1,7 +1,7 @@
 #include "m_array.h"
 
 int
-m_array_init(struct m_array* array, size_t initial_length, size_t object_size)
+m_array_init(m_array* array, size_t initial_length, size_t object_size)
 {
 	if (array == NULL)
 		return M_ARRAY_E_NULL;
@@ -17,7 +17,7 @@ m_array_init(struct m_array* array, size_t initial_length, size_t object_size)
 }
 
 int
-m_array_free(struct m_array* array)
+m_array_free(m_array* array)
 {
 	if (array == NULL)
 		return M_ARRAY_E_NULL;
@@ -34,7 +34,7 @@ m_array_free(struct m_array* array)
 }
 
 int
-m_array_length(struct m_array* array, size_t* out_length)
+m_array_length(m_array* array, size_t* out_length)
 {
 	if (array == NULL || out_length == NULL)
 		return M_ARRAY_E_NULL;
@@ -44,7 +44,7 @@ m_array_length(struct m_array* array, size_t* out_length)
 }
 
 int
-m_array_growth_factor(struct m_array* array, double new_growth_factor)
+m_array_growth_factor(m_array* array, double new_growth_factor)
 {
 	if (array == NULL)
 		return M_ARRAY_E_NULL;
@@ -63,7 +63,7 @@ min(size_t a, size_t b)
 }
 
 int
-m_array_resize(struct m_array* array, size_t new_length)
+m_array_resize(m_array* array, size_t new_length)
 {
 	if (array == NULL)
 		return M_ARRAY_E_NULL;
@@ -76,7 +76,7 @@ m_array_resize(struct m_array* array, size_t new_length)
 }
 
 int
-m_array_trim(struct m_array* array)
+m_array_trim(m_array* array)
 {
 	if (array == NULL)
 		return M_ARRAY_E_NULL;

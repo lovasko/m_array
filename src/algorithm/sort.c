@@ -3,7 +3,7 @@
 #include "m_array.h"
 
 int
-m_array_sort(struct m_array* array, int(*cmp_fn)(const void*,const void*))
+m_array_sort(m_array* array, int(*cmp_fn)(const void*,const void*))
 {
 	if (array == NULL || cmp_fn == NULL)
 		return M_ARRAY_E_NULL;

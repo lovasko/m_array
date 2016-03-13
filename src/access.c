@@ -3,7 +3,7 @@
 #include "m_array.h"
 
 int
-m_array_get(struct m_array* array, size_t index, void** out_data)
+m_array_get(m_array* array, size_t index, void** out_data)
 {
 	if (array == NULL || out_data == NULL)
 		return M_ARRAY_E_NULL;
@@ -16,10 +16,7 @@ m_array_get(struct m_array* array, size_t index, void** out_data)
 }
 
 int
-m_array_set(struct m_array* array,
-            size_t index,
-            size_t object_count,
-            void* data)
+m_array_set(m_array* array, size_t index, size_t object_count, void* data)
 {
 	if (array == NULL)
 		return M_ARRAY_E_NULL;

@@ -3,10 +3,7 @@
 #include "m_array.h"
 
 int
-m_array_insert(struct m_array* array,
-               size_t index,
-               size_t object_count,
-               void* data)
+m_array_insert(m_array* array, size_t index, size_t object_count, void* data)
 {
 	size_t new_length;
 	size_t need_length;
@@ -39,13 +36,13 @@ m_array_insert(struct m_array* array,
 }
 
 int
-m_array_append(struct m_array* array, size_t object_count, void* data)
+m_array_append(m_array* array, size_t object_count, void* data)
 {
 	return m_array_insert(array, array->used_length, object_count, data);
 }
 
 int
-m_array_prepend(struct m_array* array, size_t object_count, void* data)
+m_array_prepend(m_array* array, size_t object_count, void* data)
 {
 	return m_array_insert(array, 0, object_count, data);
 }

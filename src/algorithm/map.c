@@ -1,7 +1,7 @@
 #include "m_array.h"
 
 int
-m_array_map(struct m_array* array, void(*fn)(void*,void*), void* payload)
+m_array_map(m_array* array, void(*fn)(void*,void*), void* payload)
 {
 	size_t i;
 

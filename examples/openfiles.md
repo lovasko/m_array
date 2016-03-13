@@ -32,7 +32,7 @@ uint_cmp(const void* a, const void* b)
 }
 
 static int
-median(struct m_array* array)
+median(m_array* array)
 {
 	size_t length;
 	int* m;
@@ -47,7 +47,7 @@ median(struct m_array* array)
 int
 main(void)
 {
-	struct m_array array;
+	m_array array;
 	int i;
 	int openfiles;
 

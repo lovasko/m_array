@@ -3,7 +3,7 @@
 #include "m_array.h"
 
 int
-m_array_search(struct m_array* array,
+m_array_search(m_array* array,
                void* key,
                int(*cmp_fn)(const void*, const void*),
                int is_sorted,

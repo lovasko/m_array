@@ -3,7 +3,7 @@
 #include "m_array.h"
 
 int
-m_array_remove(struct m_array* array, size_t index, size_t object_count)
+m_array_remove(m_array* array, size_t index, size_t object_count)
 {
 	if (array == NULL)
 		return M_ARRAY_E_NULL;
@@ -20,7 +20,7 @@ m_array_remove(struct m_array* array, size_t index, size_t object_count)
 }
 
 int
-m_array_remove_all(struct m_array* array)
+m_array_remove_all(m_array* array)
 {
 	if (array == NULL)
 		return M_ARRAY_E_NULL;
