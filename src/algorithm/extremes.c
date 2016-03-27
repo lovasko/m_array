@@ -35,7 +35,7 @@ m_array_extremes(m_array* array,
 	min = &array->data[array->object_size * start];
 	max = &array->data[array->object_size * start];
 
-	for (i = start+1; i < end; i++) {
+	for (i = start+1; i < end+1; i++) {
 		elem = &array->data[array->object_size * i];
 
 		if (cmp_fn(min, elem) > 0)
