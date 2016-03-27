@@ -8,7 +8,8 @@
 #define M_ARRAY_E_NULL          1
 #define M_ARRAY_E_OUT_OF_BOUNDS 2
 #define M_ARRAY_E_GROWTH        3
-#define M_ARRAY_NOT_FOUND       4
+#define M_ARRAY_E_ORDER         4
+#define M_ARRAY_NOT_FOUND       5
 
 #define M_ARRAY_GROWTH_CONSERVATIVE 1.5
 #define M_ARRAY_GROWTH_EXPONENTIAL  2.0
@@ -43,6 +44,7 @@ int m_array_remove_all(m_array* array);
 int m_array_map(m_array* array, void(*fn)(void*,void*), void* payload);
 int m_array_sort(m_array* array, int(*cmp_fn)(const void*,const void*));
 int m_array_search(m_array* array, void* key, int(*cmp_fn)(const void*,const void*), int is_sorted, size_t* out_index);
+int m_array_extremes(m_array* array, size_t start, size_t end, int(*cmp_fn)(const void*, const void*), void** out_min, void** out_max);
 
 #endif
 
