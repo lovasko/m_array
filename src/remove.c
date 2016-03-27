@@ -20,6 +20,23 @@ m_array_remove(m_array* array, size_t index, size_t object_count)
 }
 
 int
+m_array_remove_last(m_array* array, size_t object_count)
+{
+	if (array == NULL)
+		return M_ARRAY_E_NULL;
+
+	if (object_count == 0)
+		return M_ARRAY_OK;
+
+	if (object_count > array->used_length)
+		return M_ARRAY_E_OUT_OF_BOUNDS;
+
+	array->used_length -= object_count;
+
+	return M_ARRAY_OK;
+}
+
+int
 m_array_remove_all(m_array* array)
 {
 	if (array == NULL)

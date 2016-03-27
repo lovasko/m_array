@@ -36,6 +36,7 @@ int m_array_append(m_array* array, size_t object_count, void* data);
 int m_array_prepend(m_array* array, size_t object_count, void* data);
 int m_array_insert(m_array* array, size_t index, size_t object_count, void* data);
 int m_array_remove(m_array* array, size_t index, size_t object_count);
+int m_array_remove_last(m_array* array, size_t object_count);
 int m_array_remove_all(m_array* array);
 int m_array_swap(m_array* array, size_t i, size_t j, size_t object_count);
 int m_array_map(m_array* array, void(*fn)(void*,void*), void* payload);
