@@ -24,8 +24,10 @@ main(void)
 	int devrandom;
 	uint8_t* minp;
 	uint8_t* maxp;
-	uint8_t min;
-	uint8_t max;
+	uint8_t min_number;
+	uint8_t max_number;
+	size_t min_idx;
+	size_t max_idx;
 	uint8_t number;
 	unsigned int i;
 
@@ -39,15 +41,17 @@ main(void)
 
 	m_array_map(&array, print_fn, NULL);
 	printf("\n");
-	m_array_extremes(&array, 0, 9, cmp_fn, (void**)&minp, (void**)&maxp);
-	min = *minp;
-	max = *maxp;
+	m_array_extremes(&array, 0, 9, cmp_fn, &min_idx, &max_idx);
+	m_array_get(&array, min_idx, (void**)&minp);
+	m_array_get(&array, max_idx, (void**)&maxp);
+	min_number = *minp;
+	max_number = *maxp;
 
 	m_array_sort(&array, cmp_fn);
 	m_array_map(&array, print_fn, NULL);
 	printf("\n");
 
-	printf("min = %u\nmax = %u\n", min, max);
+	printf("min = %u\nmax = %u\n", min_number, max_number);
 
 	m_array_free(&array);
 	close(devrandom);
