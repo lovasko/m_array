@@ -1,89 +1,75 @@
+#include <string.h>
+#include <errno.h>
+
 #include "m_array.h"
 
+/** Initialise the data structure.
+  *
+  * @param[in] arr  array
+  * @param[in] ilen initial length
+  * @param[in] obsz object size
+  *
+  * @return status code
+  * @retval M_ARRAY_E_NULL   arr is NULL
+  * @retval M_ARRAY_E_MEMORY unable to allocate memory (consult errno)
+  * @retval M_ARRAY_OK       success
+**/
 int
-m_array_init(m_array* array, size_t initial_length, size_t object_size)
+m_array_init(m_array* arr, uint64_t ilen, uint64_t obsz)
 {
-	if (array == NULL)
-		return M_ARRAY_E_NULL;
+  if (arr == NULL)
+    return M_ARRAY_E_NULL;
 
-	array->data = malloc(initial_length * object_size);
-	array->object_size = object_size;
-	array->used_length = 0;
-	array->alloc_length = initial_length;
-	array->init_length = initial_length;
-	array->growth_factor = M_ARRAY_GROWTH_EXPONENTIAL;
+  errno = 0;
+  arr->ar_data = malloc(ilen * obsz);
+  if (arr->ar_data == NULL)
+    return M_ARRAY_E_MEMORY;
 
-	return M_ARRAY_OK;
+  ar->ar_obsz = obsz;
+  ar->ar_ulen = 0;
+  ar->ar_alen = il;
+  ar->ar_ilen = il;
+  ar->ar_expg = 2.0;
+  ar->ar_ling = 0;
+
+  return M_ARRAY_OK;
 }
 
+/** Free all resources held by the array.
+  *
+  * @param[in] arr array
+  *
+  * @return status code
+  * @retval M_ARRAY_E_NULL arr is NULL
+  * @retval M_ARRAY_OK     success
+**/
 int
-m_array_free(m_array* array)
+m_array_free(m_array* arr)
 {
-	if (array == NULL)
-		return M_ARRAY_E_NULL;
+  if (arr == NULL)
+    return M_ARRAY_E_NULL;
 
-	free(array->data);
-	array->data = NULL;
-	array->used_length = 0;
-	array->alloc_length = 0;
-	array->object_size = 0;
-	array->init_length = 0;
-	array->growth_factor = 0.0;
+  free(arr->data);
+  memset(arr, 0, sizeof(m_array));
 
-	return M_ARRAY_OK;
+  return M_ARRAY_OK;
 }
 
+/** Return the length of the array.
+  *
+  * @param[in]  arr array
+  * @param[out] len length
+  *
+  * @return status code
+  * @retval M_ARRAY_E_NULL arr and/or len is NULL
+  * @retval M_ARRAY_OK     success
+**/
 int
-m_array_length(m_array* array, size_t* out_length)
+m_array_length(m_array* arr, size_t* len)
 {
-	if (array == NULL || out_length == NULL)
-		return M_ARRAY_E_NULL;
+  if (arr == NULL || len == NULL)
+    return M_ARRAY_E_NULL;
 
-	*out_length = array->used_length;
-	return M_ARRAY_OK;
+  *len = arr->ar_ulen;
+  return M_ARRAY_OK;
 }
-
-int
-m_array_growth_factor(m_array* array, double new_growth_factor)
-{
-	if (array == NULL)
-		return M_ARRAY_E_NULL;
-
-	if (new_growth_factor <= 1.0)
-		return M_ARRAY_E_GROWTH;
-
-	array->growth_factor = new_growth_factor;
-	return M_ARRAY_OK;
-}
-
-static size_t
-min(size_t a, size_t b)
-{
-	return (a < b) ? a : b;
-}
-
-int
-m_array_resize(m_array* array, size_t new_length)
-{
-	if (array == NULL)
-		return M_ARRAY_E_NULL;
-
-	array->alloc_length = new_length;
-	array->used_length = min(new_length, array->used_length);
-	array->data = realloc(array->data, new_length * array->object_size);
-
-	return M_ARRAY_OK;
-}
-
-int
-m_array_trim(m_array* array)
-{
-	if (array == NULL)
-		return M_ARRAY_E_NULL;
-
-	array->data = realloc(array->data, array->used_length * array->object_size);
-	array->alloc_length = array->used_length;
-
-	return M_ARRAY_OK;
-}
-
