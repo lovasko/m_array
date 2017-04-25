@@ -2,49 +2,76 @@
 
 #include "m_array.h"
 
+/** Remove objects from the array.
+  * NOTE: this function does not deallocate memory.
+  *
+  * @param[in] arr array
+  * @param[in] idx index
+  * @param[in] cnt object count
+  *
+  * @return status code
+  * @retval M_ARRAY_E_NULL   arr is NULL
+  * @retval M_ARRAY_E_BOUNDS the removal interval is out of bounds
+  * @retval M_ARRAY_OK       success
+**/
 int
-m_array_remove(m_array* array, size_t index, size_t object_count)
+m_array_remove(m_array* arr, uint64_t idx, uint64_t cnt)
 {
-	if (array == NULL)
-		return M_ARRAY_E_NULL;
+  if (arr == NULL)
+    return M_ARRAY_E_NULL;
 
-	if (index + object_count >= array->used_length)
-		return M_ARRAY_E_OUT_OF_BOUNDS;
+  if (arr->ar_ulen < idx + cnt)
+    return M_ARRAY_E_BOUNDS;
 
-	memmove(array->data + (index * array->object_size),
-	        array->data + ((index + object_count) * array->object_size),
-	        (array->used_length - index - object_count) * array->object_size);
-	array->used_length -= object_count;
+  memmove(&arr->ar_data[idx         * arr->ar_obsz],
+          &arr->ar_data[(idx + cnt) * arr->ar_obsz],
+         (arr->ar_ulen - idx - cnt) * arr->ar_obsz);
+  arr->ar_ulen -= cnt;
 
-	return M_ARRAY_OK;
+  return M_ARRAY_OK;
 }
 
+/** Remove elements from the end of the array.
+  * NOTE: this function does not deallocate memory.
+  *
+  * @param[in] arr array
+  * @param[in] cnt object count
+  *
+  * @return status code
+  * @retval M_ARRAY_E_NULL   ar is NULL
+  * @retval M_ARRAY_E_BOUNDS not enough objects to remove
+  * @retval M_ARRAY_OK       success
+**/
 int
-m_array_remove_last(m_array* array, size_t object_count)
+m_array_remove_last(m_array* arr, uint64_t cnt)
 {
-	if (array == NULL)
-		return M_ARRAY_E_NULL;
+  if (arr == NULL)
+    return M_ARRAY_E_NULL;
 
-	if (object_count == 0)
-		return M_ARRAY_OK;
+  if (arr->ar_ulen < cnt)
+    return M_ARRAY_E_BOUNDS;
 
-	if (object_count > array->used_length)
-		return M_ARRAY_E_OUT_OF_BOUNDS;
+  arr->ar_ulen -= cnt;
 
-	array->used_length -= object_count;
-
-	return M_ARRAY_OK;
+  return M_ARRAY_OK;
 }
 
+/** Remove all objects from the array.
+  * NOTE: this function does not deallocate memory.
+  *
+  * @param[in] arr array
+  *
+  * @return status code
+  * @retval M_ARRAY_E_NULL arr is NULL
+  * @retval M_ARRAY_OK     success
+**/
 int
-m_array_remove_all(m_array* array)
+m_array_remove_all(m_array* arr)
 {
-	if (array == NULL)
-		return M_ARRAY_E_NULL;
+  if (arr == NULL)
+    return M_ARRAY_E_NULL;
 
-	m_array_remove(array, 0, array->used_length);
-	m_array_resize(array, array->init_length);
+  arr->ar_ulen = 0;
 
-	return M_ARRAY_OK;
+  return M_ARRAY_OK;
 }
-
